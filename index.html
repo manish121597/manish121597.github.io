@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manish Chaudhary — Custom Discord bots</title>
+<meta name="description" content="I build custom Discord bots and automations in Node / Discord.js. Taking free builds right now to grow my portfolio.">
+<meta property="og:title" content="Manish Chaudhary — Custom Discord bots">
+<meta property="og:description" content="Custom Discord bots in Node / Discord.js. Free builds right now — full source code, yours to keep.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#161A24; --panel:#1D2230; --raise:#252B3C;
+  --text:#E6E9F0; --dim:#8D97AD; --line:#2E3549;
+  --link:#8B7CF6; --live:#42D19A; --flag:#F0864E;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:'Chivo',system-ui,sans-serif;
+  font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px}
+a{color:var(--link)}
+
+/* ---- hero ---- */
+header{padding:64px 0 48px}
+.status{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--live);
+  border:1px solid var(--live);border-radius:2px;padding:4px 10px;margin-bottom:26px;
+}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--live);display:inline-block}
+h1{
+  font-size:clamp(32px,6vw,52px);font-weight:900;line-height:1.05;
+  letter-spacing:-.035em;margin-bottom:18px;max-width:16ch;
+}
+.lede{font-size:18px;color:var(--dim);max-width:56ch;line-height:1.65}
+.lede strong{color:var(--text);font-weight:500}
+.who{
+  font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--dim);
+  margin-top:24px;padding-top:20px;border-top:1px solid var(--line);
+}
+.who b{color:var(--text);font-weight:500}
+
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.btn{
+  font-family:'JetBrains Mono',monospace;font-size:13px;text-decoration:none;
+  padding:11px 18px;border-radius:3px;border:1px solid var(--line);
+  color:var(--text);background:var(--panel);transition:border-color .15s,background .15s;
+}
+.btn:hover{border-color:var(--link);background:var(--raise)}
+.btn.primary{background:var(--link);border-color:var(--link);color:#12101F;font-weight:500}
+.btn.primary:hover{background:#9D90F8;border-color:#9D90F8}
+
+/* ---- sections ---- */
+section{padding:44px 0;border-top:1px solid var(--line)}
+h2{font-size:13px;font-family:'JetBrains Mono',monospace;font-weight:400;
+   color:var(--dim);margin-bottom:22px}
+h3{font-size:23px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px}
+
+/* ---- work ---- */
+.shot{
+  width:100%;display:block;border:1px solid var(--line);border-radius:4px;
+  background:var(--panel);margin-bottom:12px;
+}
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}
+.cap{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--dim)}
+.blurb{color:var(--dim);max-width:62ch;margin-bottom:20px}
+
+.specs{border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.spec{display:flex;gap:16px;padding:11px 16px;border-bottom:1px solid var(--line);
+      font-family:'JetBrains Mono',monospace;font-size:13px}
+.spec:last-child{border-bottom:none}
+.spec dt{color:var(--dim);flex:0 0 96px}
+.spec dd{color:var(--text)}
+.spec dd em{color:var(--flag);font-style:normal}
+
+/* ---- capabilities ---- */
+.caps{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:1px;
+      background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.cap-item{background:var(--bg);padding:16px 18px}
+.cap-item h4{font-size:15px;font-weight:700;margin-bottom:5px}
+.cap-item p{font-size:13.5px;color:var(--dim);line-height:1.5}
+.note{margin-top:16px;font-size:14px;color:var(--dim)}
+
+/* ---- process ---- */
+ol.steps{list-style:none;counter-reset:s}
+ol.steps li{
+  counter-increment:s;display:flex;gap:18px;padding:14px 0;
+  border-bottom:1px solid var(--line);
+}
+ol.steps li:last-child{border-bottom:none}
+ol.steps li::before{
+  content:counter(s,decimal-leading-zero);
+  font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--link);
+  flex:0 0 28px;padding-top:3px;
+}
+.step-t{font-weight:700;font-size:16px;display:block;margin-bottom:3px}
+.step-d{color:var(--dim);font-size:14.5px;max-width:58ch}
+
+/* ---- contact ---- */
+.contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;
+         background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.contact a{
+  background:var(--bg);padding:16px 18px;text-decoration:none;color:var(--text);
+  display:block;transition:background .15s;
+}
+.contact a:hover{background:var(--panel)}
+.contact span{display:block;font-family:'JetBrains Mono',monospace;
+              font-size:11.5px;color:var(--dim);margin-bottom:4px}
+footer{padding:36px 0 56px;font-family:'JetBrains Mono',monospace;
+       font-size:12px;color:var(--dim);border-top:1px solid var(--line)}
+
+@media (max-width:600px){
+  .shots{grid-template-columns:1fr}
+  header{padding:44px 0 34px}
+  .spec{flex-direction:column;gap:3px}
+  .spec dt{flex:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+:focus-visible{outline:2px solid var(--link);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="status"><span class="dot"></span>Open for builds — 4 free slots left</span>
+  <h1>I build custom Discord bots.</h1>
+  <p class="lede">
+    Node / Discord.js. You describe it, I build it — <strong>no templates, no reskinned
+    public bots</strong>. You get the full source code and can host it wherever you want.
+  </p>
+  <p class="who">
+    <b>Manish Chaudhary</b> — solo developer, India (IST).
+    Currently doing free builds in exchange for an honest review.
+  </p>
+  <div class="cta">
+    <a class="btn primary" href="#contact">Start a build</a>
+    <a class="btn" href="#work">See my work</a>
+  </div>
+</header>
+
+<section id="work">
+  <h2>Shipped</h2>
+  <h3>AltGuard — alt detection for giveaways</h3>
+  <p class="blurb">
+    The biggest problem with Discord giveaways is alt accounts: one person enters with
+    a dozen throwaways and real members lose. AltGuard scores every entrant on account
+    age, join pattern and shared signals, then flags the suspicious ones — before you
+    pick a winner, not weeks after.
+  </p>
+
+  <div class="shots">
+    <figure>
+      <img class="shot" src="altguard-dashboard.png" alt="AltGuard dashboard showing flagged giveaway entrants and their risk scores">
+      <figcaption class="cap">Dashboard — entrants sorted by risk score</figcaption>
+    </figure>
+    <figure>
+      <img class="shot" src="altguard-discord.png" alt="AltGuard bot posting a flagged-entrant alert inside a Discord channel">
+      <figcaption class="cap">The bot flagging alts in-server</figcaption>
+    </figure>
+  </div>
+
+  <dl class="specs">
+    <div class="spec"><dt>Stack</dt><dd>Node.js · Discord.js · PostgreSQL · web dashboard</dd></div>
+    <div class="spec"><dt>Does</dt><dd>Risk scoring, alt flagging, giveaway protection, logs</dd></div>
+    <div class="spec"><dt>Status</dt><dd><em>Live</em> — altguardhq.com</dd></div>
+    <div class="spec"><dt>Built by</dt><dd>Me, solo — design, bot, dashboard, infra</dd></div>
+  </dl>
+</section>
+
+<section>
+  <h2>What I can build for you</h2>
+  <div class="caps">
+    <div class="cap-item">
+      <h4>Moderation &amp; anti-raid</h4>
+      <p>Automod rules, raid detection, lockdowns, warn/mute/ban with a full audit log.</p>
+    </div>
+    <div class="cap-item">
+      <h4>Ticket systems</h4>
+      <p>Button-based tickets, staff claims, categories, transcripts sent on close.</p>
+    </div>
+    <div class="cap-item">
+      <h4>Giveaways &amp; events</h4>
+      <p>Entry requirements, timed draws, reroll, alt filtering, winner logging.</p>
+    </div>
+    <div class="cap-item">
+      <h4>Economy &amp; levels</h4>
+      <p>Currency, shops, inventories, XP and role rewards, leaderboards.</p>
+    </div>
+    <div class="cap-item">
+      <h4>Roles &amp; onboarding</h4>
+      <p>Reaction and button roles, verification gates, application forms, auto-welcome.</p>
+    </div>
+    <div class="cap-item">
+      <h4>API integrations</h4>
+      <p>Pull from any API — game stats, stores, sheets, webhooks, scheduled posts.</p>
+    </div>
+    <div class="cap-item">
+      <h4>Web dashboards</h4>
+      <p>A panel so your staff can change settings without touching code.</p>
+    </div>
+    <div class="cap-item">
+      <h4>Fixing broken bots</h4>
+      <p>Inherited a bot nobody maintains? I'll debug it, update it and document it.</p>
+    </div>
+  </div>
+  <p class="note">
+    Not on the list? Ask anyway — most things are buildable, and I'll tell you honestly
+    if something isn't.
+  </p>
+</section>
+
+<section>
+  <h2>How it works</h2>
+  <ol class="steps">
+    <li><div><span class="step-t">You tell me what it should do</span>
+      <span class="step-d">A rough list is fine. I'll ask a few questions to pin down the details.</span></div></li>
+    <li><div><span class="step-t">I send you the scope in writing</span>
+      <span class="step-d">Exactly what's included, what isn't, and how long it'll take. Nothing starts until you agree.</span></div></li>
+    <li><div><span class="step-t">You see a working demo early</span>
+      <span class="step-d">I put a live version in a test server so you can try it before it's finished.</span></div></li>
+    <li><div><span class="step-t">You get the bot and the source</span>
+      <span class="step-d">Full code, setup help, and 7 days of free bug fixes after delivery.</span></div></li>
+  </ol>
+</section>
+
+<section id="contact">
+  <h2>Get in touch</h2>
+  <h3>Tell me what you need built.</h3>
+  <p class="blurb">
+    Fastest way is Discord. Include what the bot should do and roughly when you need it —
+    I usually reply the same day.
+  </p>
+  <div class="contact">
+    <a href="https://discord.com/users/YOUR_DISCORD_ID"><span>Discord</span>@yourhandle</a>
+    <a href="https://x.com/idoagenticcodin"><span>X</span>@idoagenticcodin</a>
+    <a href="https://github.com/manish121597"><span>GitHub</span>manish121597</a>
+    <a href="mailto:you@example.com"><span>Email</span>you@example.com</a>
+  </div>
+</section>
+
+<footer>Manish Chaudhary · Discord bot development · India (IST)</footer>
+
+</div>
+</body>
+</html>
